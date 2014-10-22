@@ -21,6 +21,7 @@ class ServiceappServiceProvider extends ServiceProvider {
 		$this->package('serviceapp/serviceapp');
 	}
 
+
 	/**
 	 * Register the service provider.
 	 *
@@ -28,10 +29,12 @@ class ServiceappServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app['serviceapp'] = $this->app->share(function($app)
+		$this->app->booting(function()
 		{
-			return new Servicecurl; 
+		  $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+		  $loader->alias('servicecaller', 'Serviceapp\Serviceapp\Serviceapp');
 		});
+
 	}
 
 	/**
@@ -41,7 +44,7 @@ class ServiceappServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array('serviceapp');
+		return array();
 	}
 
 }
