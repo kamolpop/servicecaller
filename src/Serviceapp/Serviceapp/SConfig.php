@@ -15,7 +15,16 @@ class SConfig {
 			self::$config = include("configs.php");
 			self::$config['token_key'] = '_jobthai_token='.self::$config["client_id"];
 		}
-		return self::$config[$index];
+		
+		if( strpos( $index , 'default')!==false ){
+			$conf 	=	self::$config[preg_replace("/^(default_)/", "" , $index)];
+			$conf 	=	$conf[self::$config[$index]];
+		}else{
+			$conf 	=	self::$config[$index];
+		}
+
+		return $conf;
 	}
+
 }
 ?>

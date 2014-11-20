@@ -82,6 +82,7 @@ class CoreOperation {
         }
         return false;
     }
+    
     /**
      * [upload any files by get_content]
      * @param  array  $files 
